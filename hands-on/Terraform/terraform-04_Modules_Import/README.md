@@ -211,7 +211,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "4.23.0"
+      version = "~> 4.23.0"
     }
   }
 }
@@ -222,19 +222,19 @@ provider "aws" {
 
 variable "tf-ami" {
   type = list(string)
-  default = ["ami-0cff7528ff583bf9a", "ami-08d4ac5b634553e16", "ami-06640050dc3f556bb"]
+  default = ["ami-069aabeee6f53e7bf", "ami-007855ac798b5175e", ]
 }
 
 variable "tf-tags" {
   type = list(string)
-  default = ["aws-linux-2", "ubuntu-20.04", "red-hat-linux-8"]
+  default = ["aws-linux-2", "ubuntu-20.04"]
 }
 
 resource "aws_instance" "tf-instances" {
   ami = element(var.tf-ami, count.index )
   instance_type = "t2.micro"
-  count = 3
-  key_name = "clarusway"
+  count = 2
+  key_name = "Msimbaitt"
   security_groups = ["tf-import-sg"]
   tags = {
     Name = element(var.tf-tags, count.index )
